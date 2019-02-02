@@ -16,8 +16,8 @@
 
                     <div class="box-body">
                         <div class="form-group has-feedback{{ $errors->has('type_id') ? ' has-error' : '' }}">
-                            <label for="type_id" class="col-sm-4 control-label">报修种类</label>
-                            <div class="col-md-8">
+                            <label for="type_id" class="col-sm-2 control-label">报修种类</label>
+                            <div class="col-md-10">
                                 <select name="type_id" id="type_id" class="form-control">
                                     @foreach ($types as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
@@ -32,8 +32,8 @@
                         </div>
 
                         <div class="form-group has-feedback{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="address" class="col-sm-4 control-label">报修地点</label>
-                            <div class="col-md-8">
+                            <label for="address" class="col-sm-2 control-label">报修地点</label>
+                            <div class="col-md-10">
                                 <input id="address" type="text" class="form-control" name="address" placeholder="报修地点"
                                     value="{{ old('address') }}" required>
                                 @if ($errors->has('address'))
@@ -45,8 +45,8 @@
                         </div>
 
                         <div class="form-group has-feedback{{ $errors->has('department_id') ? ' has-error' : '' }}">
-                            <label for="department_id" class="col-sm-4 control-label">报修部门</label>
-                            <div class="col-md-8">
+                            <label for="department_id" class="col-sm-2 control-label">报修部门</label>
+                            <div class="col-md-10">
                                 <select name="department_id" id="department_id" class="form-control">
                                     @foreach ($departments as $department)
                                     <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -61,8 +61,8 @@
                         </div>
 
                         <div class="form-group has-feedback{{ $errors->has('applicant') ? ' has-error' : '' }}">
-                            <label for="applicant" class="col-sm-4 control-label">报修人</label>
-                            <div class="col-md-8">
+                            <label for="applicant" class="col-sm-2 control-label">报修人</label>
+                            <div class="col-md-10">
                                 <input id="applicant" type="text" class="form-control" name="applicant" placeholder="报修人"
                                     value="{{ old('applicant') }}" required>
                                 @if ($errors->has('applicant'))
@@ -74,8 +74,8 @@
                         </div>
 
                         <div class="form-group has-feedback{{ $errors->has('telephone') ? ' has-error' : '' }}">
-                            <label for="telephone" class="col-sm-4 control-label">联系电话</label>
-                            <div class="col-md-8">
+                            <label for="telephone" class="col-sm-2 control-label">联系电话</label>
+                            <div class="col-md-10">
                                 <input id="telephone" type="text" class="form-control" name="telephone" placeholder="联系电话"
                                     value="{{ old('telephone') }}">
                                 @if ($errors->has('telephone'))
@@ -87,8 +87,8 @@
                         </div>
 
                         <div class="form-group has-feedback{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-sm-4 control-label">故障描述</label>
-                            <div class="col-md-8">
+                            <label for="description" class="col-sm-2 control-label">故障描述</label>
+                            <div class="col-md-10">
                                 <textarea name="description" id="description" class="form-control" cols="30" rows="10"
                                     required>{{ old('description') }}</textarea>
                                 @if ($errors->has('description'))
