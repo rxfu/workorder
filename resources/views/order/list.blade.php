@@ -55,12 +55,16 @@
                                 <td>{{ $item->description }}</td>
                                 <td>
                                     @isset ($item->pathname)
-                                        <img src="{{ asset('storage/' . $item->pathname) }}" title="故障图片">
+                                        <a href="{{ asset('storage/' . $item->pathname) }}" title="{{ $item->id }}">
+                                            <img src="{{ asset('storage/' . $item->pathname) }}" title="故障图片" width="60">
+                                        </a>
                                     @endisset
                                 </td>
-                                <td>{{ $item->status ? '已处理' : '未处理' }}</td>
+                                <td>
+                                    <input type="checkbox" name="status" value="{{ $item->id }}"{{ $item->status ? ' selected' : '' }}>
+                                </td>
                                 <td>{{ $item->created_at }}</td>
-                                <td>{{ empty($item->user) ? '' : $item->user->name }}</td>
+                                <td>{{ empty($item->user) ? '' : $item->user->realname }}</td>
                                 <td>{{ $item->finished_at }}</td>
                                 <td>
                                     <a href="{{ route('order.edit', $item->id) }}" class="btn btn-info btn-flat btn-sm"
@@ -85,27 +89,75 @@
 </div>
 @endsection
 
+@push('styles')
+<!-- iCheck -->
+<link rel="stylesheet" href="{{ asset('vendor/iCheck/flat/blue.css') }}">
+@endpush
+
 @push('scripts')
 <!-- DataTables -->
 <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
 <script>
-    $(function () {
-        $('#itemsTable').DataTable({
-            'paging': true,
-            'lengthChange': true,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': true,
-            'language': {
-                'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
-            }
-        })
+$(function () {
+    $('#itemsTable').DataTable({
+        'paging': true,
+        'lengthChange': true,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': true,
+        'language': {
+            'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
+        }
     });
+
+    $('input[name="status"]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue',
+        increaseArea: '20%' /* optional */
+    });
+
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
     });
 
+    $('input[name="status"').on('ifChecked', function() {
+        $.ajax({
+            'url': '{{ url('order/status') }}/' + $(this).val(),
+            'type': 'post',
+            'data': {
+                '_method': 'put',
+                '_token': '{{ csrf_token() }}',
+                'dataType': 'json',
+                'status': $(this).prop('checked'),
+            },
+        }).fail(function(jqXHR) {
+            if (422 == jqXHR.status) {
+                $.each(jqXHR.responseJSON, function(key, value) {
+                    alert(value);
+                });
+            }
+        });
+    });
+    $('td').on({
+        'change': function() {
+            $.ajax({
+                'url': '{{ url('order/status') }}' + $(this).val(),
+                'type': 'post',
+                'data': {
+                    '_method': 'put',
+                    '_token': '{{ csrf_token() }}',
+                    'dataType': 'json',
+                    'status': $(this).prop('checked'),
+                },
+            }).complete(function(data) {
+                alert(data.responseJSON);
+            });
+        }
+    }, 'input[name="status"]');
+});
 </script>
 @endpush

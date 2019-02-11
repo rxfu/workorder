@@ -30,6 +30,7 @@ Route::name('order.')->group(
         Route::get('/order/{id}/edit', 'OrderController@edit')->name('edit');
         Route::put('/order/{id}', 'OrderController@update');
         Route::delete('/order', 'OrderController@delete');
+        Route::put('/order/status/{id}', 'OrderController@status');
     }
 );
 Route::name('type.')->group(

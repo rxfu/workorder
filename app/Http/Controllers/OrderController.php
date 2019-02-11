@@ -37,7 +37,8 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $this->validate(
-            $request, [
+            $request,
+            [
             'type_id' => 'required',
             'department_id' => 'required',
             'address' => 'required',
@@ -55,7 +56,7 @@ class OrderController extends Controller
         
         if ($order->save()) {
             $request->session()->flash('success', '系统报修成功');
-        }else {
+        } else {
             $request->session()->flash('danger', '系统报修失败');
         }
 
@@ -74,7 +75,8 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(
-            $request, [
+            $request,
+            [
                 'type_id'=>'required',
                 'department_id'=>'required',
                 'address'=>'required',
@@ -89,7 +91,7 @@ class OrderController extends Controller
         
         if ($order->save()) {
             $request->session()->flash('success', '修改工单成功');
-        }else {
+        } else {
             $request->session()->flash('danger', '修改工单失败');
         }
 
@@ -105,5 +107,23 @@ class OrderController extends Controller
         $request->session()->flash('success', '删除工单成功');
 
         return redirect()->route('order.list');
+    }
+
+    public function status(Request $request, $id)
+    {
+        if ($request->isMethod('put')) {
+            $order = Order::findOrFail($id);
+            $order->status = $request->only('status') == true ? 1 : 0;
+            $order->user_id = Auth::user()->id;
+            $order->finished_at = date('Y-m-d H:i:s');
+
+            if ($order->save()) {
+                $request->session()->flash('success', '修改维修状态成功');
+            } else {
+                $request->session()->flash('danger', '修改维修状态失败');
+            }
+
+            return redirect()->route('order.list');
+        }
     }
 }
