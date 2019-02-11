@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
                 $table->string('applicant', 50)->comment('报修人');
                 $table->string('telephone', 20)->nullable()->comment('联系电话');
                 $table->text('description')->comment('故障描述');
+                $table->string('pathname', 64)->nullable()->comment('故障图片');
                 $table->unsignedInteger('status')->default(0)->comment('维修状态');
                 $table->timestamp('finished_at')->nullable()->comment('完成时间');
                 $table->unsignedInteger('user_id')->nullable()->comment('完成人ID');

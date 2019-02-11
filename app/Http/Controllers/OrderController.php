@@ -38,11 +38,12 @@ class OrderController extends Controller
     {
         $this->validate(
             $request, [
-            'type_id'=>'required',
-            'department_id'=>'required',
-            'address'=>'required',
-            'applicant'=>'required',
-            'description'=>'required',
+            'type_id' => 'required',
+            'department_id' => 'required',
+            'address' => 'required',
+            'applicant' => 'required',
+            'description' => 'required',
+            'fault' => 'image',
             ]
         );
 
@@ -50,6 +51,7 @@ class OrderController extends Controller
         $order = new Order;
         $order->fill($inputs);
         $order->id = date('YmdHis') . random_int(100, 999);
+        $order->pathname = $request->file('fault')->store('faults');
         
         if ($order->save()) {
             $request->session()->flash('success', '系统报修成功');

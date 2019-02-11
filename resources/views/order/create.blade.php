@@ -10,8 +10,7 @@
                     <div class="box-title">{{ config('app.name', 'Laravel') }}</div>
                 </div>
 
-                <form role="form" id="create-form" name="create-form" method="POST" action="{{ url('/order') }}"
-                    aria-label="创建工单" class="form-horizontal">
+                <form role="form" id="create-form" name="create-form" method="POST" action="{{ url('/order') }}" enctype="multipart/form-data" aria-label="创建工单" class="form-horizontal">
                     @csrf
 
                     <div class="box-body">
@@ -94,6 +93,18 @@
                                 @if ($errors->has('description'))
                                 <span class="help-block" role="alert">
                                     <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback{{ $errors->has('fault') ? ' has-error' : '' }}">
+                            <label for="fault" class="col-sm-2 control-label">故障图片</label>
+                            <div class="col-md-10">
+                                <input type="file" name="fault" value="{{ old('fault') }}">
+                                @if ($errors->has('fault'))
+                                <span class="help-block" role="alert">
+                                    <strong>{{ $errors->first('fault') }}</strong>
                                 </span>
                                 @endif
                             </div>

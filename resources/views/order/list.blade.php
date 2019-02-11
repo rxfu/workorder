@@ -30,6 +30,7 @@
                                 <th scope="col">报修人</th>
                                 <th scope="col">联系电话</th>
                                 <th scope="col">故障描述</th>
+                                <th scope="col">故障图片</th>
                                 <th scope="col">维修状态</th>
                                 <th scope="col">报修时间</th>
                                 <th scope="col">完成人</th>
@@ -52,6 +53,11 @@
                                 <td>{{ $item->applicant }}</td>
                                 <td>{{ $item->telephone }}</td>
                                 <td>{{ $item->description }}</td>
+                                <td>
+                                    @isset ($item->pathname)
+                                        <img src="{{ asset('storage/' . $item->pathname) }}" title="故障图片">
+                                    @endisset
+                                </td>
                                 <td>{{ $item->status ? '已处理' : '未处理' }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ empty($item->user) ? '' : $item->user->name }}</td>
