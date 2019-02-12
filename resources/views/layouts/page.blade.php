@@ -36,10 +36,6 @@
         <!-- Main content -->
         <section class="content container-fluid">
 
-            <!--------------------------
-            | Your Page Content Here |
-            -------------------------->
-
             @yield('content')
 
         </section>
@@ -51,3 +47,26 @@
     @include('shared.footer')
 </div>
 @stop
+
+
+@push('scripts')
+<script>
+$(function(){
+    $('.sidebar-menu li:not(.treeview) > a').on('click', function(){
+        var $parent = $(this).parent().addClass('active');
+        $parent.siblings('.treeview.active').find('> a').trigger('click');
+        $parent.siblings().removeClass('active').find('li').removeClass('active');
+    });
+
+    $(window).on('load', function(){
+        $('.sidebar-menu a').each(function(){
+            if(this.href === window.location.href){
+                $(this).parent().addClass('active')
+                        .closest('.treeview-menu').addClass('.menu-open')
+                        .closest('.treeview').addClass('active');
+            }
+        });
+    });
+});
+</script>
+@endpush

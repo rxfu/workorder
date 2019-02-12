@@ -72,22 +72,21 @@
 <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script>
-    $(function () {
-        $('#itemsTable').DataTable({
-            'paging': true,
-            'lengthChange': true,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': true,
-            'language': {
-                'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
-            }
-        })
+$(function () {
+    $('#itemsTable').DataTable({
+        'paging': true,
+        'lengthChange': true,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': true,
+        'language': {
+            'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
+        }
     });
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
     });
-
+});
 </script>
 @endpush
