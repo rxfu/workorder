@@ -10,11 +10,9 @@
                 <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="{{ auth()->user()->name }}">
             </div>
             <div class="pull-left info">
-                <p>{{ auth()->user()->name }}</p>
+                <p>{{ auth()->user()->realname }}</p>
                 <!-- Status -->
-                <!--
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-          -->
+                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>
         </div>
 

@@ -35,7 +35,7 @@
                             <li class="user-header">
                                 <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="{{ auth()->user()->name }}">
                                 <p>
-                                    {{ auth()->user()->name }}
+                                    {{ auth()->user()->realname }}
                                     <small>{{ auth()->user()->created_at }}注册</small>
                                 </p>
                             </li>
@@ -43,7 +43,7 @@
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-12 text-center">
-                                        普通用户
+                                        技术部管理员
                                     </div>
                                 </div>
                                 <!-- /.row -->

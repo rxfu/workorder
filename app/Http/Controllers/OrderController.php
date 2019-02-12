@@ -113,9 +113,15 @@ class OrderController extends Controller
     {
         if ($request->isMethod('put')) {
             $order = Order::findOrFail($id);
-            $order->status = $request->only('status') == true ? 1 : 0;
-            $order->user_id = Auth::user()->id;
-            $order->finished_at = date('Y-m-d H:i:s');
+            $order->status = $request->input('status');
+
+            if ($order->status == 1) {
+                $order->user_id = Auth::user()->id;
+                $order->finished_at = date('Y-m-d H:i:s');
+            } else {
+                $order->user_id = null;
+                $order->finished_at = null;
+            }
 
             if ($order->save()) {
                 $request->session()->flash('success', '修改维修状态成功');

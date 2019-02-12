@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    <div class="form-check">
+                                    <div class="checkbox">
                                         <input type="checkbox" id="allItems" name="allItems" value="all">
                                     </div>
                                 </th>
@@ -40,9 +40,10 @@
                         </thead>
                         <tbody>
                             @foreach ($orders as $item)
-                            <tr>
+                            <tr
+                            @if (!$item->status) class="danger" @endif>
                                 <td>
-                                    <div class="form-check">
+                                    <div class="checkbox">
                                         <input type="checkbox" name="items[]" value="{{ $item->id }}">
                                     </div>
                                 </td>
@@ -61,7 +62,10 @@
                                     @endisset
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="status" value="{{ $item->id }}"{{ $item->status ? ' selected' : '' }}>
+                                    <select id="status" name="status" class="form-control">
+                                        <option value="0"{{ 0 == $item->status ? ' selected' : '' }}>未处理</option>
+                                        <option value="1"{{ 1 == $item->status ? ' selected' : '' }}>已处理</option>
+                                    </select>
                                 </td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ empty($item->user) ? '' : $item->user->realname }}</td>
@@ -89,17 +93,10 @@
 </div>
 @endsection
 
-@push('styles')
-<!-- iCheck -->
-<link rel="stylesheet" href="{{ asset('vendor/iCheck/flat/blue.css') }}">
-@endpush
-
 @push('scripts')
 <!-- DataTables -->
 <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('vendor/iCheck/icheck.min.js') }}"></script>
 <script>
 $(function () {
     $('#itemsTable').DataTable({
@@ -114,50 +111,34 @@ $(function () {
         }
     });
 
-    $('input[name="status"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue',
-        increaseArea: '20%' /* optional */
-    });
-
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
     });
 
-    $('input[name="status"').on('ifChecked', function() {
-        $.ajax({
-            'url': '{{ url('order/status') }}/' + $(this).val(),
-            'type': 'post',
-            'data': {
-                '_method': 'put',
-                '_token': '{{ csrf_token() }}',
-                'dataType': 'json',
-                'status': $(this).prop('checked'),
-            },
-        }).fail(function(jqXHR) {
-            if (422 == jqXHR.status) {
-                $.each(jqXHR.responseJSON, function(key, value) {
-                    alert(value);
-                });
-            }
-        });
-    });
     $('td').on({
         'change': function() {
             $.ajax({
-                'url': '{{ url('order/status') }}' + $(this).val(),
+                'url': '{{ url('order/status') }}/' + $(this).closest('tr').find('input[name="items[]"]').val(),
                 'type': 'post',
                 'data': {
                     '_method': 'put',
                     '_token': '{{ csrf_token() }}',
                     'dataType': 'json',
-                    'status': $(this).prop('checked'),
+                    'status': $(this).val(),
                 },
-            }).complete(function(data) {
-                alert(data.responseJSON);
+                'success': function(data) {
+                    window.location.reload();
+                }
+            })
+            .fail(function(jqXHR) {
+                if (422 == jqXHR.status) {
+                    $.each(jqXHR.responseJSON, function(key, value) {
+                        alert(value);
+                    });
+                }
             });
         }
-    }, 'input[name="status"]');
+    }, 'select#status');
 });
 </script>
 @endpush
