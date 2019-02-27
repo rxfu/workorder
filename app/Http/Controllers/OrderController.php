@@ -52,7 +52,10 @@ class OrderController extends Controller
         $order = new Order;
         $order->fill($inputs);
         $order->id = date('YmdHis') . random_int(100, 999);
-        $order->pathname = $request->file('fault')->store('faults');
+        
+        if ($request->has('fault')) {
+            $order->pathname = $request->file('fault')->store('faults');
+        }
         
         if ($order->save()) {
             $request->session()->flash('success', '系统报修成功');
