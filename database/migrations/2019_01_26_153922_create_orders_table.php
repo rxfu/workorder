@@ -14,9 +14,11 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create(
-            'orders', function (Blueprint $table) {
+            'orders',
+            function (Blueprint $table) {
                 $table->string('id', 20)->comment('工单号');
                 $table->string('type_id')->comment('报修种类ID');
+                $table->string('campus', 20)->comment('所在校区');
                 $table->string('address', 50)->comment('报修地点');
                 $table->unsignedInteger('department_id')->comment('报修部门ID');
                 $table->string('applicant', 50)->comment('报修人');
