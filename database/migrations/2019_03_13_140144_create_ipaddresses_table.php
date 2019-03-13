@@ -24,6 +24,7 @@ class CreateIpaddressesTable extends Migration
             $table->string('username', 50)->nullable()->comment('用户名');
             $table->string('password', 256)->nullable()->comment('密码');
             $table->text('memo')->nullable()->comment('备注');
+            $table->unsignedInteger('user_id')->comment('修改者ID');
             $table->timestamps();
         });
     }
