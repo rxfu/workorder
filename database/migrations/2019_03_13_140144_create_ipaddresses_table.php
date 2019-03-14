@@ -15,6 +15,7 @@ class CreateIpaddressesTable extends Migration
     {
         Schema::create('ipaddresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('campus', 10)->nullable()->comment('校区');
             $table->string('floor', 20)->nullable()->comment('楼层');
             $table->string('room', 20)->nullable()->comment('房间号');
             $table->unsignedInteger('ip', 10)->default(0)->comment('IP地址');
