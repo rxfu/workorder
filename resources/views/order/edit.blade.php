@@ -27,13 +27,28 @@
                         <div class="col-md-8">
                             <select name="type_id" id="type_id" class="form-control">
                                 @foreach ($types as $type)
-                                <option value="{{ $type->id }}" {{ $order->type_id === $type->id ? ' selected' : ''}}>{{
-                                    $type->name }}</option>
+                                    <option value="{{ $type->id }}"{{ $order->type_id === $type->id ? ' selected' : ''}}>{{ $type->name }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('type_id'))
                             <span class="help-block" role="alert">
                                 <strong>{{ $errors->first('type_id') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback{{ $errors->has('campus') ? ' has-error' : '' }}">
+                        <label for="campus" class="col-sm-2 control-label">所在校区</label>
+                        <div class="col-md-10">
+                            <select name="campus" id="campus" class="form-control">
+                                <option value="雁山"{{ $order->campus === '雁山' ? ' selected' : '' }}>雁山</option>
+                                <option value="育才"{{ $order->campus === '育才' ? ' selected' : '' }}>育才</option>
+                                <option value="王城"{{ $order->campus === '王城' ? ' selected' : '' }}>王城</option>
+                            </select>
+                            @if ($errors->has('campus'))
+                            <span class="help-block" role="alert">
+                                <strong>{{ $errors->first('campus') }}</strong>
                             </span>
                             @endif
                         </div>
@@ -57,9 +72,7 @@
                         <div class="col-md-8">
                             <select name="department_id" id="department_id" class="form-control">
                                 @foreach ($departments as $department)
-                                <option value="{{ $department->id }}"
-                                    {{ $order->department_id === $department->id ? ' selected' : '' }}>{{
-                                    $department->name }}</option>
+                                    <option value="{{ $department->id }}"{{ $order->department_id === $department->id ? ' selected' : '' }}>{{ $department->name }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('department_id'))

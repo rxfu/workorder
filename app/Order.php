@@ -15,7 +15,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'type_id', 'address', 'department_id', 'applicant', 'telephone', 'description'
+        'type_id', 'campus', 'address', 'department_id', 'applicant', 'telephone', 'description'
     ];
 
     public $incrementing = false;

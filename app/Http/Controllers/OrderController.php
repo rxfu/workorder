@@ -30,8 +30,9 @@ class OrderController extends Controller
     {
         $types = Type::all();
         $departments = Department::all();
+        $orders = Order::whereStatus(1)->orderBy('finished_at', 'desc')->get();
 
-        return view('order.create', compact('types', 'departments'));
+        return view('order.create', compact('types', 'departments', 'orders'));
     }
 
     public function store(Request $request)

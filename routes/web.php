@@ -12,7 +12,8 @@
 */
 
 Route::get(
-    '/', function () {
+    '/',
+    function () {
         return redirect()->route('order.create');
     }
 );
@@ -55,5 +56,13 @@ Route::name('user.')->group(
         Route::post('/user', 'UserController@store');
         Route::put('/user/{id}', 'UserController@update');
         Route::delete('/user', 'UserController@delete');
+    }
+);
+Route::name('ipaddress.')->group(
+    function () {
+        Route::get('/ips/{action?}/{id?}', 'IpaddressController@list')->name('list');
+        Route::post('/ip', 'IpaddressController@store');
+        Route::put('/ip/{id}', 'IpaddressController@update');
+        Route::delete('/ip', 'IpaddressController@delete');
     }
 );

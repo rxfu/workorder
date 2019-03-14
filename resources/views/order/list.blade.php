@@ -25,6 +25,7 @@
                                 </th>
                                 <th scope="col">工单号</th>
                                 <th scope="col">报修种类</th>
+                                <th scope="col">所在校区</th>
                                 <th scope="col">报修地点</th>
                                 <th scope="col">报修部门</th>
                                 <th scope="col">报修人</th>
@@ -49,6 +50,7 @@
                                 </td>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->type->name }}</td>
+                                <td>{{ $item->campus }}</td>
                                 <td>{{ $item->address }}</td>
                                 <td>{{ $item->department->name }}</td>
                                 <td>{{ $item->applicant }}</td>

@@ -35,6 +35,11 @@
             <li class="header">系统管理</li>
             <!-- Optionally, you can add icons to the links -->
             <li>
+                <a href="{{ route('ipaddress.list') }}">
+                    <i class="fa fa-link"></i> <span>IP地址管理</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('order.list') }}">
                     <i class="fa fa-link"></i> <span>工单管理</span>
                 </a>
