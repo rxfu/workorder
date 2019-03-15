@@ -9,7 +9,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="{{ url('/') }}" class="navbar-brand"><b>图书馆设备报修系统</b></a>
+                    <a href="{{ url('/') }}" class="navbar-brand">{{ config('app.name') }}</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>

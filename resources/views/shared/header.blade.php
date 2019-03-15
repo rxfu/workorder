@@ -6,7 +6,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>图</b>书馆</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>图书馆</b>工单报修系统</span>
+        <span class="logo-lg">{{ config('app.name') }}</span>
     </a>
 
     <!-- Header Navbar -->

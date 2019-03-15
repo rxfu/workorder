@@ -8,7 +8,7 @@
 <div class="wrapper">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}"><b>图书馆设备报修系统</b></a>
+            <a href="{{ url('/') }}">{{ config('app.name') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
