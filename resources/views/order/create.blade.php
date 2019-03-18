@@ -162,7 +162,7 @@
                     <td>{{ $item->department->name }}</td>
                     <td>{{ $item->applicant }}</td>
                     <td>{{ $item->description }}</td>
-                    <td>{{ $item->status ? '已处理' : '未处理' }}</td>
+                    <td>{{ $item->status->name }}</td>
                 </tr>
                 @endforeach
             </tbody>

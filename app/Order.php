@@ -15,7 +15,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'type_id', 'campus', 'address', 'department_id', 'applicant', 'telephone', 'description'
+        'type_id', 'campus', 'address', 'department_id', 'applicant', 'telephone', 'description', 'status_id', 'result'
     ];
 
     public $incrementing = false;
@@ -33,5 +33,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
     }
 }

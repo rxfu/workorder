@@ -121,6 +121,34 @@
                             @endif
                         </div>
                     </div>
+
+                    <div class="form-group has-feedback{{ $errors->has('status_id') ? ' has-error' : '' }}">
+                        <label for="status_id" class="col-sm-4 control-label">处理状态</label>
+                        <div class="col-md-8">
+                            <select name="status_id" id="status_id" class="form-control">
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status->id }}"{{ $order->status_id === $status->id ? ' selected' : '' }}>{{ $status->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('status_id'))
+                            <span class="help-block" role="alert">
+                                <strong>{{ $errors->first('status_id') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback{{ $errors->has('result') ? ' has-error' : '' }}">
+                        <label for="result" class="col-sm-4 control-label">处理结果</label>
+                        <div class="col-md-8">
+                            <textarea name="result" id="result" class="form-control" cols="30" rows="10">{{ $order->result }}</textarea>
+                            @if ($errors->has('result'))
+                            <span class="help-block" role="alert">
+                                <strong>{{ $errors->first('result') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
                 <div class="box-footer">

@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth')->except(['create', 'store']);
@@ -30,7 +29,9 @@ class OrderController extends Controller
     {
         $types = Type::all();
         $departments = Department::all();
-        $orders = Order::whereStatus(1)->orderBy('finished_at', 'desc')->get();
+        $orders = Order::with(['status' => function ($query) {
+            $query->whereIsDisplayed(true);
+        }])->orderBy('finished_at', 'desc')->get();
 
         return view('order.create', compact('types', 'departments', 'orders'));
     }
@@ -53,7 +54,7 @@ class OrderController extends Controller
         $order = new Order;
         $order->fill($inputs);
         $order->id = date('YmdHis') . random_int(100, 999);
-        
+
         if ($request->has('fault')) {
             $order->pathname = $request->file('fault')->store('faults');
         }

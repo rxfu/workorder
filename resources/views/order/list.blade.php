@@ -32,7 +32,8 @@
                                 <th scope="col">联系电话</th>
                                 <th scope="col">故障描述</th>
                                 <th scope="col">故障图片</th>
-                                <th scope="col">维修状态</th>
+                                <th scope="col">处理状态</th>
+                                <th scope="col">处理结果</th>
                                 <th scope="col">报修时间</th>
                                 <th scope="col">完成人</th>
                                 <th scope="col">完成时间</th>
@@ -63,12 +64,8 @@
                                         </a>
                                     @endisset
                                 </td>
-                                <td>
-                                    <select id="status" name="status" class="form-control">
-                                        <option value="0"{{ 0 == $item->status ? ' selected' : '' }}>未处理</option>
-                                        <option value="1"{{ 1 == $item->status ? ' selected' : '' }}>已处理</option>
-                                    </select>
-                                </td>
+                                <td>{{ $item->status->name }}</td>
+                                <td>{{ $item->result }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ empty($item->user) ? '' : $item->user->realname }}</td>
                                 <td>{{ $item->finished_at }}</td>

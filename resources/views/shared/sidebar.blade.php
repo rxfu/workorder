@@ -45,6 +45,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('status.list') }}">
+                    <i class="fa fa-link"></i> <span>维修状态管理</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('type.list') }}">
                     <i class="fa fa-link"></i> <span>维修种类管理</span>
                 </a>

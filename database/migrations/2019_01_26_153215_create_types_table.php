@@ -14,10 +14,10 @@ class CreateTypesTable extends Migration
     public function up()
     {
         Schema::create(
-            'types', function (Blueprint $table) {
+            'types',
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 50)->comment('维修种类名称');
-                $table->timestamps();
             }
         );
     }

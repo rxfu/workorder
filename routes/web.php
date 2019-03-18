@@ -67,3 +67,11 @@ Route::name('ipaddress.')->group(
         Route::delete('/ip', 'IpaddressController@delete');
     }
 );
+Route::name('status.')->group(
+    function () {
+        Route::get('/statuses/{action?}/{id?}', 'StatusController@list')->name('list');
+        Route::post('/status', 'StatusController@store');
+        Route::put('/status/{id}', 'StatusController@update');
+        Route::delete('/status', 'StatusController@delete');
+    }
+);
