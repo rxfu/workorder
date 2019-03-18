@@ -39,8 +39,8 @@
                     </div>
 
                     <div class="form-group has-feedback{{ $errors->has('campus') ? ' has-error' : '' }}">
-                        <label for="campus" class="col-sm-2 control-label">所在校区</label>
-                        <div class="col-md-10">
+                        <label for="campus" class="col-sm-4 control-label">所在校区</label>
+                        <div class="col-md-8">
                             <select name="campus" id="campus" class="form-control">
                                 <option value="雁山"{{ $order->campus === '雁山' ? ' selected' : '' }}>雁山</option>
                                 <option value="育才"{{ $order->campus === '育才' ? ' selected' : '' }}>育才</option>

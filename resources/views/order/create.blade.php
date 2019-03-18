@@ -155,7 +155,7 @@
             </thead>
             <tbody>
                 @foreach ($orders as $item)
-                <tr>
+                <tr title="处理结果" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="{{ $item->result }}">
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->type->name }}</td>
                     <td>{{ $item->address }}</td>
@@ -188,6 +188,13 @@ $(function () {
             'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
         }
     });
+    $('[data-toggle="popover"]').popover();
+    $('tbody tr').mouseover(function() {
+        $(this).addClass('success');
+        $(this).css('cursor', 'pointer');
+    }).mouseout(function() {
+        $(this).removeClass('success');
+    })
 });
 </script>
 @endpush

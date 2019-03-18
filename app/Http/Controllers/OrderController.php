@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Order;
-use App\Type;
 use App\Department;
+use App\Order;
+use App\Status;
+use App\Type;
 use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
@@ -29,9 +30,12 @@ class OrderController extends Controller
     {
         $types = Type::all();
         $departments = Department::all();
-        $orders = Order::with(['status' => function ($query) {
+        $orders = Order::whereHas('status', function ($query) {
             $query->whereIsDisplayed(true);
-        }])->orderBy('finished_at', 'desc')->get();
+        })
+        ->with('status')
+        ->orderBy('finished_at', 'desc')
+        ->get();
 
         return view('order.create', compact('types', 'departments', 'orders'));
     }
@@ -73,8 +77,9 @@ class OrderController extends Controller
         $types = Type::all();
         $departments = Department::all();
         $order = Order::findOrFail($id);
+        $statuses = Status::whereIsEnable(true)->get();
 
-        return view('order.edit', compact('order', 'types', 'departments'));
+        return view('order.edit', compact('order', 'types', 'departments', 'statuses'));
     }
 
     public function update(Request $request, $id)
