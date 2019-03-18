@@ -28,7 +28,7 @@
                                 <th scope="col">真实姓名</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">创建时间</th>
-                                <th scope="col">编辑</th>
+                                <th scope="col">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +48,10 @@
                                     <a href="{{ route('user.list', ['edit', $item->id]) }}" class="btn btn-info btn-flat btn-sm"
                                         title="编辑">
                                         <i class="icon fa fa-edit"></i> 编辑
+                                    </a>
+                                    <a href="{{ route('user.reset', $item->id) }}" class="btn btn-warning btn-flat btn-sm"
+                                        title="重置密码">
+                                        <i class="icon fa fa-user-secret"></i> 重置密码
                                     </a>
                                 </td>
                             </tr>

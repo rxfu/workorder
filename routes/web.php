@@ -56,6 +56,7 @@ Route::name('user.')->group(
         Route::post('/user', 'UserController@store');
         Route::put('/user/{id}', 'UserController@update');
         Route::delete('/user', 'UserController@delete');
+        Route::get('/user/reset/{id}', 'UserController@reset')->name('reset');
     }
 );
 Route::name('ipaddress.')->group(

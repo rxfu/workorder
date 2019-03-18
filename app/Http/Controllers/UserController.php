@@ -8,7 +8,6 @@ use Auth;
 
 class UserController extends Controller
 {
-
     public function password()
     {
         return view('auth.passwords.change');
@@ -17,7 +16,8 @@ class UserController extends Controller
     public function change(Request $request)
     {
         $this->validate(
-            $request, [
+            $request,
+            [
             'old_password'          => 'required',
             'password'              => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = $request->user();
         if (Auth::attempt(['username' => $user->username, 'password' => $old])) {
             if ($password === $confirm && mb_strlen($password) >= 6) {
-                $user->password = bcrypt($password);
+                $user->password = $password;
                 $user->save();
 
                 $request->session()->flash('success', '修改密码成功');
@@ -56,7 +56,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate(
-            $request, [
+            $request,
+            [
             'username'=>'required',
             'password'=>'required|min:6',
             'realname'=>'required'
@@ -69,7 +70,7 @@ class UserController extends Controller
         
         if ($user->save()) {
             $request->session()->flash('success', '创建用户成功');
-        }else {
+        } else {
             $request->session()->flash('danger', '创建用户失败');
         }
 
@@ -79,7 +80,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(
-            $request, [
+            $request,
+            [
             'username'=>'required',
             'realname'=>'required'
             ]
@@ -91,7 +93,7 @@ class UserController extends Controller
         
         if ($user->save()) {
             $request->session()->flash('success', '修改用户成功');
-        }else {
+        } else {
             $request->session()->flash('danger', '修改用户失败');
         }
 
@@ -107,5 +109,20 @@ class UserController extends Controller
         $request->session()->flash('success', '删除用户成功');
 
         return redirect()->route('user.list');
+    }
+
+    public function reset(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->password = '123456';
+
+        if ($user->save()) {
+            $request->session()->flash('success', '重置用户密码成功');
+        } else {
+            $request->session()->flash('danger', '重置用户密码失败');
+        }
+
+        return back();
     }
 }
