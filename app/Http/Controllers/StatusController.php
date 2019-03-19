@@ -16,7 +16,7 @@ class StatusController extends Controller
             $status = Status::findOrFail($id);
         }
 
-        return view('Status.list', compact('statuses', 'action', 'status'));
+        return view('status.list', compact('statuses', 'action', 'status'));
     }
 
     public function store(Request $request)
