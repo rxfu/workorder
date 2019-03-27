@@ -98,6 +98,14 @@ class OrderController extends Controller
         $inputs = $request->all();
         $order = Order::findOrFail($id);
         $order->fill($inputs);
+
+        if ($order->status_id != 1) {
+            $order->user_id = Auth::user()->id;
+            $order->finished_at = date('Y-m-d H:i:s');
+        } else {
+            $order->user_id = null;
+            $order->finished_at = null;
+        }
         
         if ($order->save()) {
             $request->session()->flash('success', '修改工单成功');
