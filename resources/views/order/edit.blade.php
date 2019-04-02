@@ -27,7 +27,7 @@
                         <div class="col-md-8">
                             <select name="type_id" id="type_id" class="form-control">
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->id }}"{{ $order->type_id === $type->id ? ' selected' : ''}}>{{ $type->name }}</option>
+                                    <option value="{{ $type->id }}"{{ $order->type_id == $type->id ? ' selected' : ''}}>{{ $type->name }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('type_id'))
