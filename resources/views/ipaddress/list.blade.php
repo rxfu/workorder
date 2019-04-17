@@ -38,7 +38,7 @@
                                 <th scope="col">修改者</th>
                                 <th scope="col">创建时间</th>
                                 <th scope="col">更新时间</th>
-                                <th scope="col">编辑</th>
+                                <th scope="col" class="all">编辑</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,10 +93,17 @@
 </div>
 @endsection
 
+@push('styles')
+<link href="{{ asset('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/datatables.net/responsive/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
 <!-- DataTables -->
 <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables.net/responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables.net/responsive/js/responsive.bootstrap.min.js') }}"></script>
 <script>
 $(function () {
     $('#itemsTable').DataTable({
@@ -108,7 +115,21 @@ $(function () {
         'autoWidth': true,
         'language': {
             'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
-        }
+        },
+        'responsive': {
+            'details': {
+                'type': "column",
+                'target': 0
+            }
+        },
+        'columnDefs': [{
+            'orderable': false,
+            'targets': 1
+        }, {
+            'className': 'control',
+            'orderable': false,
+            'targets': 0
+        }],
     });
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);

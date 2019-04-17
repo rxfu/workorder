@@ -10,7 +10,7 @@ class IpaddressController extends Controller
 {
     public function list($action = null, $id = null)
     {
-        $ipaddresses = Ipaddress::all();
+        $ipaddresses = Ipaddress::orderBy('ip')->get();
 
         $ipaddress = null;
         if ($action == 'edit') {

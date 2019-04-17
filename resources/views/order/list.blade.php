@@ -37,7 +37,7 @@
                                 <th scope="col">报修时间</th>
                                 <th scope="col">完成人</th>
                                 <th scope="col">完成时间</th>
-                                <th scope="col">编辑</th>
+                                <th scope="col" class="all">编辑</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,10 +92,17 @@
 </div>
 @endsection
 
+@push('styles')
+<link href="{{ asset('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/datatables.net/responsive/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
 <!-- DataTables -->
 <script src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables.net/responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables.net/responsive/js/responsive.bootstrap.min.js') }}"></script>
 <script>
 $(function () {
     $('#itemsTable').DataTable({
@@ -107,37 +114,25 @@ $(function () {
         'autoWidth': true,
         'language': {
             'url': "{{ asset('vendor/datatables.net/lang/Chinese.json') }}"
-        }
+        },
+        'responsive': {
+            'details': {
+                'type': "column",
+                'target': 0
+            }
+        },
+        'columnDefs': [{
+            'orderable': false,
+            'targets': 1
+        }, {
+            'className': 'control',
+            'orderable': false,
+            'targets': 0
+        }],
     });
-
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
     });
-
-    $('td').on({
-        'change': function() {
-            $.ajax({
-                'url': '{{ url('order/status') }}/' + $(this).closest('tr').find('input[name="items[]"]').val(),
-                'type': 'post',
-                'data': {
-                    '_method': 'put',
-                    '_token': '{{ csrf_token() }}',
-                    'dataType': 'json',
-                    'status': $(this).val(),
-                },
-                'success': function(data) {
-                    window.location.reload();
-                }
-            })
-            .fail(function(jqXHR) {
-                if (422 == jqXHR.status) {
-                    $.each(jqXHR.responseJSON, function(key, value) {
-                        alert(value);
-                    });
-                }
-            });
-        }
-    }, 'select#status');
 });
 </script>
 @endpush
