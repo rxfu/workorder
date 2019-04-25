@@ -18,6 +18,7 @@
                     <table id="itemsTable" class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col"></th>
                                 <th scope="col">
                                     <div class="form-check">
                                         <input type="checkbox" id="allItems" name="allItems" value="all">
@@ -33,6 +34,7 @@
                         <tbody>
                             @foreach ($statuses as $item)
                             <tr>
+                                <td></td>
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox" name="items[]" value="{{ $item->id }}">

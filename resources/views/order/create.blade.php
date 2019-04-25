@@ -155,7 +155,16 @@
             </thead>
             <tbody>
                 @foreach ($orders as $item)
-                <tr title="处理结果" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="{{ $item->result }}">
+                <tr title="处理结果" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="{{ $item->result }}"
+                    @switch ($item->status_id)
+                        @case(1)
+                            class="text-danger"
+                            @break
+
+                        @case(3)
+                            class="text-info"
+                            @break
+                    @endswitch>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->type->name }}</td>
                     <td>{{ $item->address }}</td>

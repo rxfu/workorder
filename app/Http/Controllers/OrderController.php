@@ -34,7 +34,7 @@ class OrderController extends Controller
             $query->whereIsDisplayed(true);
         })
         ->with('status')
-        ->orderBy('finished_at', 'desc')
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return view('order.create', compact('types', 'departments', 'orders'));

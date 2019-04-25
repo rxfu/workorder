@@ -18,6 +18,7 @@
                     <table id="itemsTable" class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col"></th>
                                 <th scope="col">
                                     <div class="checkbox">
                                         <input type="checkbox" id="allItems" name="allItems" value="all">
@@ -43,7 +44,16 @@
                         <tbody>
                             @foreach ($orders as $item)
                             <tr
-                            @if (!$item->status) class="danger" @endif>
+                            @switch ($item->status_id)
+                                @case(1)
+                                    class="text-danger"
+                                    @break
+
+                                @case(3)
+                                    class="text-info"
+                                    @break
+                            @endswitch>
+                                <td></td>
                                 <td>
                                     <div class="checkbox">
                                         <input type="checkbox" name="items[]" value="{{ $item->id }}">

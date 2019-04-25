@@ -18,32 +18,34 @@
                     <table id="itemsTable" class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col"></th>
                                 <th scope="col">
                                     <div class="form-check">
                                         <input type="checkbox" id="allItems" name="allItems" value="all">
                                     </div>
                                 </th>
                                 <th scope="col">#</th>
-                                <th scope="col">类别</th>
-                                <th scope="col">校区</th>
-                                <th scope="col">楼层</th>
-                                <th scope="col">房间</th>
+                                <th scope="col" class="none">类别</th>
+                                <th scope="col" class="none">校区</th>
+                                <th scope="col" class="none">楼层</th>
+                                <th scope="col" class="none">房间</th>
                                 <th scope="col">IP地址</th>
-                                <th scope="col">MAC地址</th>
+                                <th scope="col" class="none">MAC地址</th>
                                 <th scope="col">用途</th>
-                                <th scope="col">机器名</th>
+                                <th scope="col" class="none">机器名</th>
                                 <th scope="col">用户名</th>
                                 <th scope="col">密码</th>
-                                <th scope="col">备注</th>
-                                <th scope="col">修改者</th>
-                                <th scope="col">创建时间</th>
-                                <th scope="col">更新时间</th>
+                                <th scope="col" class="none">备注</th>
+                                <th scope="col" class="none">修改者</th>
+                                <th scope="col" class="none">创建时间</th>
+                                <th scope="col" class="none">更新时间</th>
                                 <th scope="col" class="all">编辑</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($ipaddresses as $item)
                             <tr>
+                                <td></td>
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox" name="items[]" value="{{ $item->id }}">
@@ -129,7 +131,7 @@ $(function () {
             'className': 'control',
             'orderable': false,
             'targets': 0
-        }],
+        }]
     });
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
