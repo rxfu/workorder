@@ -144,13 +144,13 @@
         <table id="itemsTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">工单号</th>
-                    <th scope="col">报修种类</th>
-                    <th scope="col">报修地点</th>
-                    <th scope="col">报修部门</th>
-                    <th scope="col">报修人</th>
-                    <th scope="col">故障描述</th>
-                    <th scope="col">维修状态</th>
+                    <th scope="col" style="white-space: nowrap;">工单号</th>
+                    <th scope="col" style="white-space: nowrap;">报修种类</th>
+                    <th scope="col" style="white-space: nowrap;">报修地点</th>
+                    <th scope="col" style="white-space: nowrap;">报修部门</th>
+                    <th scope="col" style="white-space: nowrap;">报修人</th>
+                    <th scope="col" style="white-space: nowrap;">故障描述</th>
+                    <th scope="col" style="white-space: nowrap;">维修状态</th>
                 </tr>
             </thead>
             <tbody>
