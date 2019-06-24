@@ -64,6 +64,11 @@
                     <i class="fa fa-link"></i> <span>用户管理</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('statistics.list') }}">
+                    <i class="fa fa-link"></i> <span>数据统计</span>
+                </a>
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

@@ -17,4 +17,9 @@ class Type extends Model
     ];
 
     public $timestamps = false;
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

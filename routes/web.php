@@ -75,3 +75,8 @@ Route::name('status.')->group(
         Route::delete('/status', 'StatusController@delete');
     }
 );
+Route::name('statistics.')->group(
+    function () {
+        Route::get('/statistics', 'StatisticsController@list')->name('list');
+    }
+);

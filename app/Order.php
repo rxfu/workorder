@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use SoftDeletes;
-       
+
     /**
      * The attributes that are mass assignable.
      *
@@ -38,5 +38,10 @@ class Order extends Model
     public function status()
     {
         return $this->belongsTo('App\Status');
+    }
+
+    public function scopeCountUsers($query, $userId)
+    {
+        return $query->whereUserId($userId)->count();
     }
 }
