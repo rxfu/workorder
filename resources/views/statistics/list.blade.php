@@ -37,7 +37,10 @@
                             $total = 0;
                         @endphp
                         @foreach ($users as $user)
-                            <th scope="col">{{ $total += $user->orders()->count() }}</th>
+                            @php
+                                $total += $user->orders()->count()
+                            @endphp
+                            <th scope="col">{{ $user->orders()->count() }}</th>
                         @endforeach
                         <th scope="col">{{ $total }}</th>
                     </tfoot>
