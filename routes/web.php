@@ -20,6 +20,9 @@ Route::get(
 
 Auth::routes();
 
+Route::get('/order', 'OrderController@create')->name('order.create');
+Route::post('/order', 'OrderController@store');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/password', 'UserController@password')->name('password');
@@ -27,8 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::name('order.')->group(
         function () {
             Route::get('/orders', 'OrderController@list')->name('list');
-            Route::get('/order', 'OrderController@create')->name('create');
-            Route::post('/order', 'OrderController@store');
+            // Route::get('/order', 'OrderController@create')->name('create');
+            // Route::post('/order', 'OrderController@store');
             Route::get('/order/{id}/edit', 'OrderController@edit')->name('edit');
             Route::put('/order/{id}', 'OrderController@update');
             Route::delete('/order', 'OrderController@delete');
