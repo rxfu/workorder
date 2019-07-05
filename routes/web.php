@@ -84,4 +84,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/statistics', 'StatisticsController@list')->name('list');
         }
     );
+    Route::name('project.')->group(
+        function () {
+            Route::get('/projects', 'ProjectController@list')->name('list');
+            Route::get('/project', 'ProjectController@create')->name('create');
+            Route::post('/project', 'ProjectController@store');
+            Route::get('/project/{id}/edit', 'ProjectController@edit')->name('edit');
+            Route::put('/project/{id}', 'ProjectController@update');
+            Route::delete('/project', 'ProjectController@delete');
+        }
+    );
 });
