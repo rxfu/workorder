@@ -13,8 +13,13 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'content', 'begin_at', 'end_at', 'user_id', 'participant',
+        'id', 'name', 'content', 'begin_at', 'end_at', 'user_id', 'participant',
     ];
 
     public $incrementing = false;
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

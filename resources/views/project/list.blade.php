@@ -51,7 +51,7 @@
                                 <td>{{ $item->user->realname }}</td>
                                 <td>{{ $item->participant }}</td>
                                 <td>
-                                    <a href="{{ route('project.edit', $item->id) }}" class="btn btn-info btn-flat btn-sm"
+                                    <a href="{{ route('project.list', ['edit', $item->id]) }}" class="btn btn-info btn-flat btn-sm"
                                         title="编辑">
                                         <i class="icon fa fa-edit"></i> 编辑
                                     </a>
@@ -70,12 +70,20 @@
             </form>
         </div>
     </div>
+
+    @if ($action == 'edit')
+    @include('project.edit')
+    @else
+    @include('project.create')
+    @endif
 </div>
 @endsection
 
 @push('styles')
 <link href="{{ asset('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/datatables.net/responsive/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+<!-- Date Picker -->
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}">
 @endpush
 
 @push('scripts')
@@ -84,6 +92,9 @@
 <script src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net/responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables.net/responsive/js/responsive.bootstrap.min.js') }}"></script>
+<!-- Date Picker 1.8.0 -->
+<script src="{{ asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
 <script>
 $(function () {
     $('#itemsTable').DataTable({
@@ -113,6 +124,12 @@ $(function () {
     });
     $('#allItems').change(function () {
         $(':checkbox[name="items[]"]').prop('checked', $(this).is(':checked') ? true : false);
+    });
+    $('.datepicker').datepicker({
+        'language': 'zh-CN',
+        'todayBtn': true,
+        'todayHighlight': true,
+        'format': 'yyyy-mm-dd'
     });
 });
 </script>

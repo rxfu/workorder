@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use Auth;
 
 class ProjectController extends Controller
 {
@@ -30,6 +31,8 @@ class ProjectController extends Controller
 
         $inputs = $request->all();
         $project = new Project;
+        $project->id = date('YmdHis') . random_int(100, 999);
+        $project->user_id = Auth::id();
         $project->fill($inputs);
         
         if ($project->save()) {

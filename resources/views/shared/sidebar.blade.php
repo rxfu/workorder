@@ -40,6 +40,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('project.list') }}">
+                    <i class="fa fa-link"></i> <span>项目管理</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('order.list') }}">
                     <i class="fa fa-link"></i> <span>工单管理</span>
                 </a>

@@ -48,7 +48,7 @@
                 <div class="form-group has-feedback{{ $errors->has('begin_at') ? ' has-error' : '' }}">
                     <label for="begin_at" class="col-sm-2 control-label">起始时间</label>
                     <div class="col-md-10">
-                        <input id="begin_at" type="text" class="form-control" name="begin_at" placeholder="起始时间" value="{{ old('begin_at') }}" required>
+                        <input id="begin_at" type="text" class="form-control datepicker" name="begin_at" placeholder="起始时间" value="{{ old('begin_at') }}" required>
                         @if ($errors->has('begin_at'))
                         <span class="help-block" role="alert">
                             <strong>{{ $errors->first('begin_at') }}</strong>
@@ -60,7 +60,7 @@
                 <div class="form-group has-feedback{{ $errors->has('end_at') ? ' has-error' : '' }}">
                     <label for="end_at" class="col-sm-2 control-label">结束时间</label>
                     <div class="col-md-10">
-                        <input id="end_at" type="text" class="form-control" name="end_at" placeholder="结束时间" value="{{ old('end_at') }}" required>
+                        <input id="end_at" type="text" class="form-control datepicker" name="end_at" placeholder="结束时间" value="{{ old('end_at') }}">
                         @if ($errors->has('end_at'))
                         <span class="help-block" role="alert">
                             <strong>{{ $errors->first('end_at') }}</strong>
@@ -80,4 +80,3 @@
         </form>
     </div>
 </div>
-@stop

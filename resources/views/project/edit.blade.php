@@ -6,6 +6,7 @@
 
         <form role="form" id="edit-form" name="edit-form" method="POST" action="{{ url('/project') }}" aria-label="编辑项目" class="form-horizontal">
             @csrf
+            @method('put')
 
             <div class="box-body">
                 <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -48,7 +49,7 @@
                 <div class="form-group has-feedback{{ $errors->has('begin_at') ? ' has-error' : '' }}">
                     <label for="begin_at" class="col-sm-2 control-label">起始时间</label>
                     <div class="col-md-10">
-                        <input id="begin_at" type="text" class="form-control" name="begin_at" placeholder="起始时间" value="{{ $project->begin_at }}" required>
+                        <input id="begin_at" type="text" class="form-control datepicker" name="begin_at" placeholder="起始时间" value="{{ $project->begin_at }}" required>
                         @if ($errors->has('begin_at'))
                         <span class="help-block" role="alert">
                             <strong>{{ $errors->first('begin_at') }}</strong>
@@ -60,7 +61,7 @@
                 <div class="form-group has-feedback{{ $errors->has('end_at') ? ' has-error' : '' }}">
                     <label for="end_at" class="col-sm-2 control-label">结束时间</label>
                     <div class="col-md-10">
-                        <input id="end_at" type="text" class="form-control" name="end_at" placeholder="结束时间" value="{{ $project->end_at }}" required>
+                        <input id="end_at" type="text" class="form-control datepicker" name="end_at" placeholder="结束时间" value="{{ $project->end_at }}">
                         @if ($errors->has('end_at'))
                         <span class="help-block" role="alert">
                             <strong>{{ $errors->first('end_at') }}</strong>
@@ -72,12 +73,11 @@
 
             <div class="box-footer">
                 <div class="col-sm-offset-5">
-                    <button type="submit" class="btn btn-success">
-                        <i class="icon fa fa-plus"></i> 创建
+                    <button type="submit" class="btn btn-info">
+                        <i class="icon fa fa-save"></i> 修改
                     </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-@stop
