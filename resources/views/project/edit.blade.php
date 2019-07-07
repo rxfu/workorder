@@ -4,7 +4,7 @@
             <div class="box-title">编辑项目</div>
         </div>
 
-        <form role="form" id="edit-form" name="edit-form" method="POST" action="{{ url('/project') }}" aria-label="编辑项目" class="form-horizontal">
+        <form role="form" id="edit-form" name="edit-form" method="POST" action="{{ url('/project/' . $project->id) }}" aria-label="编辑项目" class="form-horizontal">
             @csrf
             @method('put')
 
